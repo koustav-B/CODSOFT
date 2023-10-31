@@ -1,0 +1,41 @@
+package Task4;
+
+import java.util.Scanner;
+
+public class CurrencyConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Define exchange rates (for illustration purposes)
+        double usdToEurRate = 0.85;
+        double usdToInrRate = 75.0;
+
+        System.out.print("Enter the base currency (USD, EUR, INR): ");
+        String baseCurrency = scanner.nextLine().toUpperCase();
+
+        System.out.print("Enter the target currency (USD, EUR, INR): ");
+        String targetCurrency = scanner.nextLine().toUpperCase();
+
+        System.out.print("Enter the amount to convert: ");
+        double amount = scanner.nextDouble();
+
+        double conversionRate = 1.0;
+
+        // Set the conversion rate based on the selected currencies
+        if (baseCurrency.equals("USD") && targetCurrency.equals("EUR")) {
+            conversionRate = usdToEurRate;
+        } else if (baseCurrency.equals("USD") && targetCurrency.equals("INR")) {
+            conversionRate = usdToInrRate;
+        } else if (baseCurrency.equals("EUR") && targetCurrency.equals("USD")) {
+            conversionRate = 1 / usdToEurRate;
+        } else if (baseCurrency.equals("INR") && targetCurrency.equals("USD")) {
+            conversionRate = 1 / usdToInrRate;
+        } else {
+            System.out.println("Currency conversion is not available for the selected currencies.");
+            return;
+        }
+
+        double convertedAmount = amount * conversionRate;
+        System.out.println("Converted amount: " + convertedAmount + " " + targetCurrency);
+    }
+}
